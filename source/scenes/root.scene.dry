@@ -1,0 +1,200 @@
+title: Root Scene
+new-page: true
+go-to: post_event if started = 1; start_menu if started = 0
+
+# TODO: do that thing that we did before...
+
+@start_menu
+new-page: true
+go-to: start_menu_2
+
+
+= Valdara Between 1930s - A Fictional Alternate History Mod
+
+@start_menu_2
+
+- @start: Start game
+- @credits: Credits
+- @game_over.achievements
+
+
+@start
+on-arrival: {!
+Q.started = 1;
+// time elapsed (in months)
+Q.time = 1;
+Q.year = 1935;
+Q.month = 1;
+Q.week = 1;
+Q.day = -1;
+// how many actions have been taken today?
+Q.day_actions = 0;          
+// how many actions have been taken this week?
+Q.week_actions = 0;
+// how many actions have been taken this month?
+Q.month_actions = 0;
+// how many actions have been taken this year?
+Q.year_actions = 0;            
+
+// 0 = unknown difficulty, 1 = normal mode, 2 = hard mode, 3 = hard mode no saves
+Q.difficulty = 0;
+Q.the_Canon_Mode = 0;
+Q.Player_Party_Name = "Not Yet Named or idk";
+Q.Player_Party = "Unk";
+Q.party_name_map = {"SWPV": "Social Workers' Party",
+        "RLFP": "Revolutionary Labour Front Party",
+        "PCLPV": "People's Conservative League Party",
+        "DUPV": "Democratic Union Party of Valdara"};
+
+Q.SWPV_is_Player = 0;
+Q.RLFL_is_Player = 0;
+Q.PCLPV_is_Player = 0;
+Q.DUPV_is_Player = 0;
+
+Q.Player_in_Parliament = 0;
+Q.Player_in_Goverment = 0;
+Q.Player_in_Ruin = 0;
+
+// multiplayer stuff
+Q.Current_Player = 1;
+Q.n_players = 1;
+// the player ID of the next player
+Q.Next_Player = 0;
+
+Q.player1_party = "Unk";
+Q.player2_party = "";
+Q.player3_party = "";
+Q.player4_party = "";
+
+// party resources
+Q.SWPV_resources = 2;
+Q.RLFP_resources = 2;
+Q.PCLPV_resources = 3;
+Q.DUPV_resources = 2;
+// party dues
+Q.SWPV_dues = 2;
+Q.RLFP_dues = 2;
+Q.PCLPV_dues = 3;
+Q.DUPV_dues = 2;
+
+// difficulty-affected modifiers
+// dissent thresholds for party split
+// (blank)
+Q.SWPV_split_threshold = 55;
+Q.RLFP_split_threshold = 55;
+// strength changes on supporting blrblr
+Q.SWPV_support_change = 6;
+Q.RLFP_support_change = 6;
+// dissent reduction on party_disunity
+Q.SWPV_discipline_change = 5;
+Q.RLFP_discipline_change = 5;
+// maximum numbers of advisors
+Q.max_advisors = 4;
+// inter-party relations changes
+Q.inter-party_relations_change_rate = 6;
+
+// Advisors/Leaders
+Q.m_n_advisors = 3;
+Q.b_n_advisors = 3;
+Q.sr_n_advisors = 2;
+Q.k_n_advisors = 5;
+// timer - this decrements by 1 every turn, and is set to 5 whenever an advisor action is used, so that you can only use one advisor action every 5 months.
+// let's just put all of the timers here... (sure Chenn sure)
+// most cards are on a timer.
+Q.timers = [//SWPV_party
+            'SWPV_Enemies',
+            // events
+            'mass_demobilization', 'crime_wave'
+            ];
+Q.advisor_action_timer = 0;
+
+             
+// Records of Statistics
+
+!}
+set-bg: blank
+new-page: true
+
+> *Nothingburger because it's WIP*
+
+  - Dev, Metaquote Book
+
+For more information on the politics of Valdara, see the "Library" page on the top left. If this is your first time playing the game, it is recommended that you read at least some of this information.
+
+Difficulty affects starting resources and inter-party relations, as well as how difficult it is to change party advisors and ideology, reduce dissent, and increase relations.
+
+- @Easy_Mode
+- @Normal_Mode
+- @Hard_Mode
+- @Canon_Mode
+- @Hcore_Mode
+- @local_multiplayer
+#- @online_multiplayer
+
+@Easy_Mode
+title: Single Player (Easy)
+on-arrival: difficulty = -1; SWPV_resources = 4; RLFP_resources = 4; max_advisors = 5;
+go-to: party_selection
+
+Select a party:
+
+@Normal_Mode
+title: Single Player (Normal)
+on-arrival: difficulty = 1
+go-to: party_selection
+
+Select a party:
+
+@Hard_Mode
+title: Single Player (Hard)
+on-arrival: difficulty = 2; max_advisors = 3
+go-to: party_selection
+
+Select a party:
+
+@Canon_Mode
+title: Single Player (Historical)
+on-arrival: difficulty = 3; max_advisors = 3
+
+@Hcore_Mode
+title: Single Player (Hard)
+on-arrival: difficulty = 4; max_advisors = 1
+go-to: party_selection
+
+Select a party:
+
+
+@party_selection
+
+- @SWPV-pase
+- @PCLPV-pase
+- @DUPV-pase
+- @RLFP-pase
+
+@local_multiplayer
+title: Local Multiplayer
+choose-if: 1 == 0
+unavailable-subtitle: Not yet implemented
+
+TODO
+
+@online_multiplayer
+title: Online Multiplayer
+choose-if: 1 == 0
+unavailable-subtitle: Not yet implemented
+
+TODO
+
+@SWPV-pase
+title: Russian Social-Democratic Labor Party (Bolshevik)
+choose-if: achievement_game_completed
+unavailable-subtitle: Complete the game as one of the other parties first.
+
+**Russian Social-Democratic Labor Party (Bolsheviks)** - The "majority" faction of the RSDLP is in fact the smaller party. Established by Vladimir Lenin's arguments in the various RSDLP congresses, the Bolsheviks are seen as more radical than the Mensheviks. They are a disciplined and centralized party of professional revolutionaries who aim to act as the vanguard of a proletarian revolution. During Lenin's exile, the remaining members in Russia have become more moderate and accommodating.
+
+- @bolsheviks_2: Yes, I am a Bolshevik!
+- @party_selection: No, select a different party.
+
+@SWPV_2
+on-arrival: player_party_name = 1; player_party = "SWPV"; SWPV_is_player = 1; PCLPV_is_player = 0;
+go-to: intros
