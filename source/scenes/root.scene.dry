@@ -94,14 +94,14 @@ Q.max_advisors = 4;
 Q.inter-party_relations_change_rate = 6;
 
 // Advisors/Leaders
-Q.m_n_advisors = 3;
-Q.b_n_advisors = 3;
-Q.sr_n_advisors = 2;
-Q.k_n_advisors = 5;
+Q.SWPV_n_advisors = 3;
+Q.RLFP_n_advisors = 3;
+Q.PCLPV_n_advisors = 2;
+Q.DUPV_n_advisors = 5;
 // timer - this decrements by 1 every turn, and is set to 5 whenever an advisor action is used, so that you can only use one advisor action every 5 months.
 // let's just put all of the timers here... (sure Chenn sure)
 // most cards are on a timer.
-Q.timers = [//SWPV_party
+Q.timers = [//SWPV_cardsss
             'SWPV_Enemies',
             // events
             'mass_demobilization', 'crime_wave'
@@ -196,7 +196,20 @@ unavailable-subtitle: Complete blop.
 
 @SWPV_2
 on-arrival: player_party_name = 1; player_party = "SWPV"; SWPV_is_player = 1; PCLPV_is_player = 0
-go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_hcore
+go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_canon if difficulty = 3; main.main_hcore if difficulty = 4
+
+@RLFP_pase
+title: Revolutionary Labour Front Party (RLFP)
+unavailable-subtitle: B A S E D.
+
+**Revolutionary LabourFront Party**. WIP
+
+- RLFP_2: Yes, I am a LAbauer!
+- @party_selection
+
+@RLFP_2
+on-arrrival: player party name = 4; player_party = "RLFP"; RLFP_is_player = 1
+go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_canon = 3; main.main_hcore if difficulty = 4
 
 @PCLPV_pase
 title: People's Conservative League Party of Valdara (PCLPV)
@@ -209,9 +222,20 @@ unavailable-subtitle: Complete blop.
 
 @PCLPV_2
 on-arrival: player_party_name = 2; player_party = "PCLPV"; PCLPV_is_player = 1
-go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_hcore if difficulty = 3
+go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_canon = 3; main.main_hcore if difficulty = 4
 
 @DUPV_pase
+title: Democratic Union Party of Valdara (DUPV)
+unavailable-subtitle: Blopp.
+
+**Democratic Union Party of Valdara**. WIP
+
+- DUPV_2: Yes, I am a Democeratzz!
+- @party_selection
+
+@DUPV_2
+on-arrrival: player party name = 3; player_party = "DUPV"; DUPV_is_player = 1
+go-to: main if difficulty = 1; main.main_easy if difficulty < 0; main.main_hard if difficulty > 1; main.main_canon = 3; main.main_hcore if difficulty = 4
 
 = Week 1, January 1935
 
